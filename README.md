@@ -38,7 +38,7 @@ Each todo contains:
 
 1. Clone the repository:
 ```bash
-git clone [repository-url]
+git clone https://github.com/thecyfrin/todo_redesign.git
 cd todo_redesign
 ```
 
