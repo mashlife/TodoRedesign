@@ -8,7 +8,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 import 'package:path/path.dart' as path;
 import 'package:provider/provider.dart';
-import 'package:todo_redesign/src/data/todo-provider.dart';
+import 'package:todo_redesign/src/providers/todo-provider.dart';
 import 'package:todo_redesign/src/models/todo_model.dart';
 import 'package:todo_redesign/src/utils/colors.dart';
 import 'package:todo_redesign/src/utils/extenstions.dart';
@@ -71,7 +71,7 @@ class _TodoScreenState extends State<TodoScreen> {
       final document = Document.fromJson(jsonDecode(widget.todo.note!));
       _controller.document = document;
     } catch (e) {
-      print('Error decoding JSON: $e');
+      debugPrint('Error decoding JSON: $e');
     }
   }
 
@@ -134,6 +134,7 @@ class _TodoScreenState extends State<TodoScreen> {
                   borderSide: BorderSide.none,
                 ),
                 padding: EdgeInsets.all(10),
+                radius: BorderRadius.zero,
               ),
             ),
             Utils.vertSpacer(10),
@@ -165,34 +166,37 @@ class _TodoScreenState extends State<TodoScreen> {
               ),
             ),
             Expanded(
-              child: QuillEditor(
-                focusNode: _editorFocusNode,
-                scrollController: _editorScrollController,
-                controller: _controller,
-
-                config: QuillEditorConfig(
-                  placeholder: 'Start writing your notes...',
-                  padding: const EdgeInsets.all(16),
-                  embedBuilders: [
-                    ...FlutterQuillEmbeds.editorBuilders(
-                      imageEmbedConfig: QuillEditorImageEmbedConfig(
-                        imageProviderBuilder: (context, imageUrl) {
-                          // https://pub.dev/packages/flutter_quill_extensions#-image-assets
-                          if (imageUrl.startsWith('assets/')) {
-                            return AssetImage(imageUrl);
-                          }
-                          return null;
-                        },
+              child: Hero(
+                tag: "ToDo description ${widget.todo.id}",
+                child: QuillEditor(
+                  focusNode: _editorFocusNode,
+                  scrollController: _editorScrollController,
+                  controller: _controller,
+              
+                  config: QuillEditorConfig(
+                    placeholder: 'Start writing your notes...',
+                    padding: const EdgeInsets.all(16),
+                    embedBuilders: [
+                      ...FlutterQuillEmbeds.editorBuilders(
+                        imageEmbedConfig: QuillEditorImageEmbedConfig(
+                          imageProviderBuilder: (context, imageUrl) {
+                            // https://pub.dev/packages/flutter_quill_extensions#-image-assets
+                            if (imageUrl.startsWith('assets/')) {
+                              return AssetImage(imageUrl);
+                            }
+                            return null;
+                          },
+                        ),
+                        videoEmbedConfig: QuillEditorVideoEmbedConfig(
+                          customVideoBuilder: (videoUrl, readOnly) {
+                            // To load YouTube videos https://github.com/singerdmx/flutter-quill/releases/tag/v10.8.0
+                            return null;
+                          },
+                        ),
                       ),
-                      videoEmbedConfig: QuillEditorVideoEmbedConfig(
-                        customVideoBuilder: (videoUrl, readOnly) {
-                          // To load YouTube videos https://github.com/singerdmx/flutter-quill/releases/tag/v10.8.0
-                          return null;
-                        },
-                      ),
-                    ),
-                    TimeStampEmbedBuilder(),
-                  ],
+                      TimeStampEmbedBuilder(),
+                    ],
+                  ),
                 ),
               ),
             ),

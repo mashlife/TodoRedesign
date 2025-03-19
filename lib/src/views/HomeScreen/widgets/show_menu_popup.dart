@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_redesign/src/data/todo-provider.dart';
+import 'package:todo_redesign/src/providers/todo-provider.dart';
 import 'package:todo_redesign/src/models/todo_model.dart';
 import 'package:todo_redesign/src/utils/convert-extensions.dart';
 

@@ -9,7 +9,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 import 'package:path/path.dart' as path;
 import 'package:provider/provider.dart';
-import 'package:todo_redesign/src/data/todo-provider.dart';
+import 'package:todo_redesign/src/providers/todo-provider.dart';
 import 'package:todo_redesign/src/models/todo_model.dart';
 import 'package:todo_redesign/src/utils/colors.dart';
 import 'package:todo_redesign/src/utils/extenstions.dart';
@@ -27,6 +27,7 @@ class AddTodoScreen extends StatefulWidget {
 class _AddTodoScreenState extends State<AddTodoScreen> {
   late final TextEditingController _titleController;
   late final QuillController _controller;
+  late final String documentId;
   final FocusNode _editorFocusNode = FocusNode();
   final ScrollController _editorScrollController = ScrollController();
   final Random _random = Random();
@@ -35,6 +36,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   @override
   void initState() {
     _titleController = TextEditingController();
+    documentId = generateRandomNumber().toString();
     _controller = () {
       return QuillController.basic(
         config: QuillControllerConfig(
@@ -75,7 +77,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
 
       context.read<TodoProvider>().updateList(
         TodoModel(
-          id: generateRandomNumber().toString(),
+          id: documentId,
           title: _titleController.text.trim(),
           description: cleanedInsert,
           note: jsonEncode(_controller.document.toDelta().toJson()),
@@ -128,6 +130,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                 borderSide: BorderSide.none,
               ),
               padding: EdgeInsets.all(10),
+              radius: BorderRadius.zero,
             ),
             Utils.vertSpacer(10),
             QuillSimpleToolbar(
