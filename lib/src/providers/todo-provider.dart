@@ -73,7 +73,11 @@ class TodoProvider extends ChangeNotifier {
     if (todoJsonList != null) {
       _todoData.clear();
       _todoData.addAll(todoJsonList.map((json) => TodoModel.fromMap(json)));
-    } else {
+    }
+    ///Just saying hi52125
+    ///
+    //TODO: remove this else part in production
+    else {
       final jsondata = {
         "id": "6453",
         "title": "Mushfiqur Rahaman",
@@ -85,8 +89,20 @@ class TodoProvider extends ChangeNotifier {
         "status": "ready",
       };
 
+      final testJson = {
+        "id": "1721",
+        "title": "Test Json",
+        "description": "You can import and export from this app as both ",
+        "note":
+            "[{\"insert\":\"You can import and export from this app as both \"},{\"insert\":\"CSV\",\"attributes\":{\"bold\":true}},{\"insert\":\" and \"},{\"insert\":\"Json.\",\"attributes\":{\"bold\":true}},{\"insert\":\"\\n\\n\"},{\"insert\":\"Do you want to know how?\",\"attributes\":{\"bold\":true,\"italic\":true}},{\"insert\":\"\\n\\nHow to the home screen. \"},{\"insert\":\"Tap and hold\",\"attributes\":{\"bold\":true}},{\"insert\":\" any notes. There is your export options. Shall we try. Export this file and a json format. \\n\\nAlso 2 files are given in json and csv format in the test folder. Check those also. \\nTo import click the book icon on App Bar \"},{\"insert\":\"\\n\\n\",\"attributes\":{\"header\":3}}]",
+        "createdAt": "1742393787956",
+        "status": "ready",
+      };
+
       final todo = TodoModel.fromMap(jsonEncode(jsondata));
       _todoData.add(todo);
+      final anotherTodo = TodoModel.fromMap(jsonEncode(testJson));
+      _todoData.add(anotherTodo);
     }
     notifyListeners();
   }

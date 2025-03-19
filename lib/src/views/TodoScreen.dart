@@ -6,12 +6,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
+import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:provider/provider.dart';
-import 'package:todo_redesign/src/providers/todo-provider.dart';
 import 'package:todo_redesign/src/models/todo_model.dart';
+import 'package:todo_redesign/src/providers/todo-provider.dart';
 import 'package:todo_redesign/src/utils/colors.dart';
 import 'package:todo_redesign/src/utils/extenstions.dart';
+import 'package:todo_redesign/src/utils/text-types.dart';
 import 'package:todo_redesign/src/utils/textfield.dart';
 import 'package:todo_redesign/src/utils/utils.dart';
 import 'package:todo_redesign/src/widgets/timestamp-embed.dart';
@@ -120,7 +122,21 @@ class _TodoScreenState extends State<TodoScreen> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Hero(
+              tag: "Todo time ${widget.todo.id}",
+              child: TextType.subTitle(
+                DateFormat("dd MMM, yyyy").format(
+                  DateTime.fromMillisecondsSinceEpoch(
+                    int.parse(widget.todo.createdAt!),
+                  ),
+                ),
+              ),
+            ),
+            Utils.vertSpacer(5),
+
             Hero(
               tag: "Todo title ${widget.todo.id}",
 
@@ -172,7 +188,7 @@ class _TodoScreenState extends State<TodoScreen> {
                   focusNode: _editorFocusNode,
                   scrollController: _editorScrollController,
                   controller: _controller,
-              
+
                   config: QuillEditorConfig(
                     placeholder: 'Start writing your notes...',
                     padding: const EdgeInsets.all(16),

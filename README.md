@@ -3,6 +3,8 @@
 A modern Flutter todo application with a rich feature set, built using Material Design 3 and Provider state management.
 
 
+
+
 ## About Me
 I am Mushfiq, a mid level Mobile Application & Server Side developer. I have worked on many freelance project and still working on some. But day by day, I feel like I am not learning anything new. That's why I am looking for someone who can provide food to my learning hunger. Thanks for your time. 
 
@@ -30,8 +32,8 @@ Each todo contains:
 ## Installation
 
 ### Prerequisites
-- Flutter SDK (latest stable version)
-- Dart SDK
+- Flutter SDK (3.29.1 used) 
+- Dart SDK (3.7.0 used)
 - Git
 
 ### Setup Instructions

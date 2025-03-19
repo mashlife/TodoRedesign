@@ -169,10 +169,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       ),
                                       Utils.vertSpacer(5),
-                                      TextType.placeholder(
-                                        DateFormat("dd MMM, yyyy").format(
-                                          DateTime.fromMillisecondsSinceEpoch(
-                                            int.parse(todo.createdAt!),
+                                      Hero(
+                                        tag: "Todo time ${todo.id}",
+
+                                        child: TextType.placeholder(
+                                          DateFormat("dd MMM, yyyy").format(
+                                            DateTime.fromMillisecondsSinceEpoch(
+                                              int.parse(todo.createdAt!),
+                                            ),
                                           ),
                                         ),
                                       ),
