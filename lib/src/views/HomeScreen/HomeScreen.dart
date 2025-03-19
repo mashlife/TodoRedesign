@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_redesign/src/providers/todo-provider.dart';
 import 'package:todo_redesign/src/utils/colors.dart';
 import 'package:todo_redesign/src/utils/extenstions.dart';
+import 'package:todo_redesign/src/utils/permission-extensions.dart';
 import 'package:todo_redesign/src/utils/text-types.dart';
 import 'package:todo_redesign/src/utils/utils.dart';
 import 'package:todo_redesign/src/views/AddTodo.dart';
@@ -22,10 +23,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+
     _getTodos();
   }
 
   _getTodos() async {
+    await PermissionExtensions.requestStoragePermission();
     await context.read<TodoProvider>().getTodoList();
   }
 
