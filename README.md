@@ -4,7 +4,6 @@ A modern Flutter todo application with a rich feature set, built using Material 
 
 
 
-
 ## About Me
 I am Mushfiq, a mid level Mobile Application & Server Side developer. I have worked on many freelance project and still working on some. But day by day, I feel like I am not learning anything new. That's why I am looking for someone who can provide food to my learning hunger. Thanks for your time. 
 
